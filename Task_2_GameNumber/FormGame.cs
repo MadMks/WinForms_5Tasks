@@ -15,7 +15,7 @@ namespace Task_2_GameNumber
         /// <summary>
         /// Диапазон загадываемых чисел.
         /// </summary>
-        private const int _range = 3;
+        private const int _range = 10;
 
         /// <summary>
         /// Список чисел, которые называл Комп.
