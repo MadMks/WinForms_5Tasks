@@ -52,6 +52,7 @@
     <Compile Include="FormRect.Designer.cs">
       <DependentUpon>FormRect.cs</DependentUpon>
     </Compile>
+    <Compile Include="MouseCoordinates.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
