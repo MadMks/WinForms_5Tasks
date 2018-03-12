@@ -36,6 +36,35 @@ namespace Task_3_Rect
             this.Height = 250;
 
             this.MouseClick += FormRect_MouseClick;
+            this.MouseMove += FormRect_MouseMove;
+            this.KeyDown += FormRect_KeyDown;
+
+            //this.
+        }
+
+        
+
+        private void FormRect_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Modifiers == Keys.Control)
+            {
+                MessageBox.Show("Close   !");
+            }
+            else if (e.Modifiers == Keys.Control)
+            {
+                //MessageBox.Show("Ctrl");
+            }
+        }
+
+
+
+
+        /// <summary>
+        /// Обработчик перемещения указателя мыши.
+        /// </summary>
+        private void FormRect_MouseMove(object sender, MouseEventArgs e)
+        {
+            this.Text = $"Текущие координаты мыши: X={e.X}, Y={e.Y}";
         }
 
 
@@ -44,18 +73,53 @@ namespace Task_3_Rect
         /// </summary>
         private void FormRect_MouseClick(object sender, MouseEventArgs e)
         {
-            if (IsPointOnTheBoundaryOfARectangle(e))
+
+
+            //if (IsLeftMouseButtonAndCtrlClick(e))
+            //{
+            //    MessageBox.Show("777");
+
+            //}
+            //else if (LeftMouseButtonClick(e))
+            //{
+            //    if (IsPointOnTheBoundaryOfARectangle(e))
+            //    {
+            //        ShowMessagePointLocation("на границе прямоугольника");
+            //    }
+            //    else if (IsAPointOutsideTheRectangle(e))
+            //    {
+            //        ShowMessagePointLocation("снаружи прямоугольника");
+            //    }
+            //    else if (IsAPointInsideTheRectangle(e))
+            //    {
+            //        ShowMessagePointLocation("внутри прямоугольника");
+            //    }
+            //}
+            //else if (RightMouseButtonClick(e))
+            //{
+
+            //}
+
+        }
+
+        private bool IsLeftMouseButtonAndCtrlClick(MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
             {
-                ShowMessagePointLocation("на границе прямоугольника");
+                return true;
             }
-            else if (IsAPointOutsideTheRectangle(e))
-            {
-                ShowMessagePointLocation("снаружи прямоугольника");
-            }
-            else if (IsAPointInsideTheRectangle(e))
-            {
-                ShowMessagePointLocation("внутри прямоугольника");
-            }
+
+            return false;
+        }
+
+        private bool RightMouseButtonClick(MouseEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool LeftMouseButtonClick(MouseEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
 
@@ -82,8 +146,8 @@ namespace Task_3_Rect
         private bool IsAPointInsideTheRectangle(MouseEventArgs e)
         {
             if (e.X > _indent || e.Y > _indent
-                || (e.X < this.Width - _indent)
-                || (e.Y < this.Height - _indent))
+                || e.X < (this.ClientRectangle.Right - _indent)
+                || e.Y < (this.ClientRectangle.Bottom - _indent))
             {
                 return true;
             }
@@ -99,8 +163,8 @@ namespace Task_3_Rect
         private bool IsAPointOutsideTheRectangle(MouseEventArgs e)
         {
             if (e.X < _indent || e.Y < _indent
-                || (e.X > this.Width - _indent)
-                || (e.Y > this.Height - _indent))
+                || e.X > (this.ClientRectangle.Right - _indent)
+                || e.Y > (this.ClientRectangle.Bottom - _indent))
             {
                 return true;
             }
@@ -116,8 +180,8 @@ namespace Task_3_Rect
         private bool IsPointOnTheBoundaryOfARectangle(MouseEventArgs e)
         {
             if (e.X == _indent || e.Y == _indent
-                || (e.X == this.Width - _indent)
-                || (e.Y == this.Height - _indent))
+                || e.X == (this.ClientRectangle.Right - _indent)
+                || e.Y == (this.ClientRectangle.Bottom - _indent))
             {
                 return true;
             }
