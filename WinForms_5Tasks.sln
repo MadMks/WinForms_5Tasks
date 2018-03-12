@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task_2_GameNumber", "Task_2
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task_3_Rect", "Task_3_Rect\Task_3_Rect.csproj", "{9155E074-CF20-4E5E-8F0C-52534DE909FE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task_4_CreationOfStatics", "Task_4_CreationOfStatics\Task_4_CreationOfStatics.csproj", "{F61F08B1-AB83-4D57-9B07-9F53FB13C579}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{9155E074-CF20-4E5E-8F0C-52534DE909FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9155E074-CF20-4E5E-8F0C-52534DE909FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9155E074-CF20-4E5E-8F0C-52534DE909FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F61F08B1-AB83-4D57-9B07-9F53FB13C579}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F61F08B1-AB83-4D57-9B07-9F53FB13C579}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F61F08B1-AB83-4D57-9B07-9F53FB13C579}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F61F08B1-AB83-4D57-9B07-9F53FB13C579}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
