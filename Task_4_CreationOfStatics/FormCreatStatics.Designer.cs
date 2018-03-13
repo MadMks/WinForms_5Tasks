@@ -1,6 +1,6 @@
 ﻿namespace Task_4_CreationOfStatics
 {
-    partial class Form1
+    partial class FormCreatStatics
     {
         /// <summary>
         /// Required designer variable.
