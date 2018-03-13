@@ -17,14 +17,14 @@ namespace Task_3_Rect
         /// </summary>
         private const int _indent = 10;
         /// <summary>
+        /// Координаты мыши.
+        /// </summary>
+        private Point _mousePoint;
+        /// <summary>
         /// Нажат Ctrl.
         /// </summary>
         private bool IsPressedCtrl { get; set; }
-        /// <summary>
-        /// Координаты мыши.
-        /// </summary>
-        private MouseCoordinates MouseCoord { get; set; }
-
+        
 
 
         public FormRect()
@@ -48,9 +48,8 @@ namespace Task_3_Rect
             this.Height = 250;
 
             IsPressedCtrl = false;
-            MouseCoord = new MouseCoordinates();
-            MouseCoord.X = 0;
-            MouseCoord.Y = 0;
+            _mousePoint.X = 0;
+            _mousePoint.Y = 0;
 
             this.MouseClick += FormRect_MouseClick;
             this.MouseMove += FormRect_MouseMove;
@@ -94,8 +93,8 @@ namespace Task_3_Rect
             }
 
             // Запомним последние изменения координат мыши.
-            MouseCoord.X = e.X;
-            MouseCoord.Y = e.Y;
+            _mousePoint.X = e.X;
+            _mousePoint.Y = e.Y;
         }
 
         
@@ -141,7 +140,7 @@ namespace Task_3_Rect
         /// <returns>true если изменились.</returns>
         private bool IsCoordinatesMouseHaveChanged(MouseEventArgs e)
         {
-            if (e.X != MouseCoord.X || e.Y != MouseCoord.Y)
+            if (e.X != _mousePoint.X || e.Y != _mousePoint.Y)
             {
                 return true;
             }
