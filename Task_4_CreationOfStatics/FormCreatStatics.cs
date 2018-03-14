@@ -23,6 +23,8 @@ namespace Task_4_CreationOfStatics
         //public List<Rectangle> ListStatics { get; set; }
         public List<Label> ListLabels { get; set; }
 
+        public bool IsDBLCLK { get; set; }
+
         public FormCreatStatics()
         {
             InitializeComponent();
@@ -45,10 +47,15 @@ namespace Task_4_CreationOfStatics
 
         private void FormCreatStatics_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            //IsDBLCLK = true;
+
+            if (e.Button == MouseButtons.Left /*&& e.Clicks == 2*/)
             {
+                //MessageBox.Show("2");
                 CheckForStaticWithAPointAndDeleteStatic(e);
             }
+
+            //MessageBox.Show("2");
         }
 
         
@@ -73,8 +80,25 @@ namespace Task_4_CreationOfStatics
                 _staticRect.Width = e.X - _staticRect.X;
                 _staticRect.Height = e.Y - _staticRect.Y;
 
-                CheckingTheSizeAndCreatingAStatics();
+                if (CoordinatesHaveChanged() == true)
+                {
+                    CheckingTheSizeAndCreatingAStatics();
+                }
+                else
+                {
+                    return;
+                }   
             }
+        }
+
+        private bool CoordinatesHaveChanged()
+        {
+            if (_staticRect.Width == 0 && _staticRect.Height == 0)
+            {
+                return false;
+            }
+
+            return true;
         }
 
 
@@ -126,6 +150,8 @@ namespace Task_4_CreationOfStatics
                     if (IsClickOnStatic(e, ListLabels[i]) == true)
                     {
                         ListLabels.RemoveAt(i);
+
+                        // найти и удалить из контролс
                     }
                 }
             }
