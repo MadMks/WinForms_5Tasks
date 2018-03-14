@@ -70,33 +70,254 @@ namespace Task_5_RunawayStatics
                 // метод двигать
                 // или событие
 
+                MotionWhenApproachingTheWall(e);
 
                 //MoveRandomly();
                 MovementsInDifferentDirections(e);
             }
         }
 
-        private void MovementsInDifferentDirections(MouseEventArgs e)
+        private void MotionWhenApproachingTheWall(MouseEventArgs e)
         {
-            if (StaticOnTheLeft(e) == true)
+            if (IsMouseInTheFirstQuadrant(e) == true)
             {
-                MoveRight();
+                if (IsCloseToTheLeftWall() == true)
+                {
+                    MoveDown();
+                    MoveRight();
+                }
+                else if (IsCloseToTheTopWall() == true)
+                {
+                    MoveRight();
+                    MoveDown();
+                }
             }
-            else if (StaticOnTheRight(e) == true)
+            else if (IsMouseInTheSecondQuadrant(e) == true)
             {
-                MoveLeft();
+                if (IsCloseToTheRightWall() == true)
+                {
+                    MoveDown();
+                    MoveLeft();
+                }
+                else if (IsCloseToTheTopWall() == true)
+                {
+                    MoveLeft();
+                    MoveDown();
+                }
             }
-            else if (StaticOnTheTop(e) == true)
+            else if (IsMouseInTheThirdQuadrant(e) == true)
             {
-                MoveDown();
+                if (IsCloseToTheLeftWall() == true)
+                {
+                    MoveUp();
+                    MoveRight();
+                }
+                else if (IsCloseToTheBottomWall() == true)
+                {
+                    MoveRight();
+                    MoveUp();
+                }
             }
-            else if (StaticOnTheBottom(e) == true)
+            else if (IsMouseInTheFourthQuadrant(e) == true)
             {
-                MoveUp();
+                if (IsCloseToTheRightWall() == true)
+                {
+                    MoveUp();
+                    MoveLeft();
+                }
+                else if (IsCloseToTheBottomWall() == true)
+                {
+                    MoveLeft();
+                    MoveUp();
+                }
             }
         }
 
-        private bool StaticOnTheBottom(MouseEventArgs e)
+        private bool IsCloseToTheBottomWall()
+        {
+            if (_labelStatic.Bottom > this.ClientRectangle.Bottom - _indentForm)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool IsCloseToTheRightWall()
+        {
+            if (_labelStatic.Right > this.ClientRectangle.Right - _indentForm)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool IsCloseToTheTopWall()
+        {
+            if (_labelStatic.Top < this.ClientRectangle.Top + _indentForm)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool IsCloseToTheLeftWall()
+        {
+            if (_labelStatic.Left < this.ClientRectangle.Left + _indentForm)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool IsMouseInTheFourthQuadrant(MouseEventArgs e)
+        {
+            if (
+                (e.X > (this.ClientRectangle.Width / 2))
+                && (e.Y > (this.ClientRectangle.Height / 2))
+                )
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool IsMouseInTheThirdQuadrant(MouseEventArgs e)
+        {
+            if (
+                (e.X < (this.ClientRectangle.Width / 2))
+                && (e.Y > (this.ClientRectangle.Height / 2))
+                )
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool IsMouseInTheSecondQuadrant(MouseEventArgs e)
+        {
+            if (
+                (e.X > (this.ClientRectangle.Width / 2))
+                && (e.Y < (this.ClientRectangle.Height / 2))
+                )
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool IsMouseInTheFirstQuadrant(MouseEventArgs e)
+        {
+            if (
+                (e.X < (this.ClientRectangle.Width / 2))
+                && (e.Y < (this.ClientRectangle.Height / 2))
+                )
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private void MovementsInDifferentDirections(MouseEventArgs e)
+        {
+            if ( IsLeftOfTheStatic(e) == true)
+            {
+                MoveRight();
+            }
+            else if (IsRightOfTheStatic(e) == true)
+            {
+                MoveLeft();
+            }
+            else if (IsTopOfTheStatic(e) == true)
+            {
+                MoveDown();
+            }
+            else if (IsBottomOfTheStatic(e) == true)
+            {
+                MoveUp();
+            }
+            else if (IsLeftAndBottomOfTheStatic(e) == true)
+            {
+                MoveRandomly(); // TODO по диагонали.
+            }
+            else if (IsLeftAndTopOfTheStatic(e) == true)
+            {
+                MoveRandomly();
+            }
+            else if (IsRightAndTopOfTheStatic(e) == true)
+            {
+                MoveRandomly();
+            }
+            else if (IsRightAndBottomOfTheStatic(e) == true)
+            {
+                MoveRandomly();
+            }
+        }
+
+        private bool IsRightAndBottomOfTheStatic(MouseEventArgs e)
+        {
+            if (
+                (e.X >= _labelStatic.Right)
+                &&
+                (e.Y >= _labelStatic.Bottom)
+                )
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool IsRightAndTopOfTheStatic(MouseEventArgs e)
+        {
+            if (
+                (e.X >= _labelStatic.Right)
+                &&
+                (e.Y <= _labelStatic.Top)
+                )
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool IsLeftAndTopOfTheStatic(MouseEventArgs e)
+        {
+            if (
+                (e.X <= _labelStatic.Left)
+                &&
+                (e.Y <= _labelStatic.Top)
+                )
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool IsLeftAndBottomOfTheStatic(MouseEventArgs e)
+        {
+            if (
+                (e.X <= _labelStatic.Left)
+                &&
+                (e.Y >= _labelStatic.Bottom)
+                )
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool IsBottomOfTheStatic(MouseEventArgs e)
         {
             if (
                 (e.X < _labelStatic.Right)
@@ -114,7 +335,7 @@ namespace Task_5_RunawayStatics
             return false;
         }
 
-        private bool StaticOnTheTop(MouseEventArgs e)
+        private bool IsTopOfTheStatic(MouseEventArgs e)
         {
             if (
                 (e.X < _labelStatic.Right)
@@ -132,7 +353,7 @@ namespace Task_5_RunawayStatics
             return false;
         }
 
-        private bool StaticOnTheRight(MouseEventArgs e)
+        private bool IsRightOfTheStatic(MouseEventArgs e)
         {
             if (
                 (e.X < _labelStatic.Right + _aroundTheStaics)
@@ -150,7 +371,7 @@ namespace Task_5_RunawayStatics
             return false;
         }
 
-        private bool StaticOnTheLeft(MouseEventArgs e)
+        private bool IsLeftOfTheStatic(MouseEventArgs e)
         {
             if (
                 (e.X > _labelStatic.Left - _aroundTheStaics)
