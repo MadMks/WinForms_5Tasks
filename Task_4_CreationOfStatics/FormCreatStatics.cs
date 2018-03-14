@@ -13,17 +13,17 @@ namespace Task_4_CreationOfStatics
     public partial class FormCreatStatics : Form
     {
         private const string Title = "Задание 4 - создание статиков.";
-        //private RectCoordinates rect { get; set; }
+
         /// <summary>
         /// Координаты создаваемого статика.
         /// </summary>
         private Rectangle _staticRect;
-        //public Rectangle StaticRect { get; private set; }
-
-        //public List<Rectangle> ListStatics { get; set; }
+        /// <summary>
+        /// Список созданных статиков.
+        /// </summary>
         public List<Label> ListLabels { get; set; }
 
-        public bool IsDBLCLK { get; set; }
+
 
         public FormCreatStatics()
         {
@@ -32,12 +32,20 @@ namespace Task_4_CreationOfStatics
             this.Load += FormCreatStatics_Load;
         }
 
+
+
+        // Обработчики событий.
+
+
+        /// <summary>
+        /// Обработчик загрузки формы.
+        /// </summary>
         private void FormCreatStatics_Load(object sender, EventArgs e)
         {
             this.Text = Title;
             this.Width = 500;
             this.Height = 300;
-            //_staticRect = new Rectangle();
+        
             ListLabels = new List<Label>();
 
             this.MouseDown += FormCreatStatics_MouseDown;
@@ -45,21 +53,22 @@ namespace Task_4_CreationOfStatics
             this.MouseDoubleClick += FormCreatStatics_MouseDoubleClick;
         }
 
+
+        /// <summary>
+        /// Обработчик MouseDoubleClick.
+        /// </summary>
         private void FormCreatStatics_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            //IsDBLCLK = true;
-
-            if (e.Button == MouseButtons.Left /*&& e.Clicks == 2*/)
+            if (e.Button == MouseButtons.Left)
             {
-                //MessageBox.Show("2");
                 CheckForStaticWithAPointAndDeleteStatic(e);
             }
-
-            //MessageBox.Show("2");
         }
 
-        
 
+        /// <summary>
+        /// Обработчик MouseDown.
+        /// </summary>
         private void FormCreatStatics_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -73,6 +82,10 @@ namespace Task_4_CreationOfStatics
             }
         }
 
+
+        /// <summary>
+        /// Обработчик MouseUp.
+        /// </summary>
         private void FormCreatStatics_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -91,6 +104,14 @@ namespace Task_4_CreationOfStatics
             }
         }
 
+
+        // Методы.
+
+
+        /// <summary>
+        /// Координаты изменились.
+        /// </summary>
+        /// <returns>true если изменились.</returns>
         private bool CoordinatesHaveChanged()
         {
             if (_staticRect.Width == 0 && _staticRect.Height == 0)
@@ -119,6 +140,12 @@ namespace Task_4_CreationOfStatics
             }
         }
 
+
+        /// <summary>
+        /// Проверка клик над статиком.
+        /// Если true, то вывод данных.
+        /// </summary>
+        /// <param name="e">Параметры события.</param>
         private void CheckForStaticWithAPointAndShowMessage(MouseEventArgs e)
         {
             if (ListLabels.Count > 0)
@@ -149,9 +176,12 @@ namespace Task_4_CreationOfStatics
                 {
                     if (IsClickOnStatic(e, ListLabels[i]) == true)
                     {
+                        this.Controls.Remove(ListLabels[i]);
                         ListLabels.RemoveAt(i);
 
-                        // найти и удалить из контролс
+                        this.Text = Title;
+
+                        return;
                     }
                 }
             }
@@ -159,11 +189,11 @@ namespace Task_4_CreationOfStatics
 
 
         /// <summary>
-        /// 
+        /// Клик мышки на статике.
         /// </summary>
-        /// <param name="e"></param>
-        /// <param name="label"></param>
-        /// <returns></returns>
+        /// <param name="e">Параметры события.</param>
+        /// <param name="label">Статик.</param>
+        /// <returns>true если клик был на статике.</returns>
         private bool IsClickOnStatic(MouseEventArgs e, Label label)
         {
             if (
@@ -177,15 +207,18 @@ namespace Task_4_CreationOfStatics
             return false;
         }
 
+
+        /// <summary>
+        /// Покажем координаты в заголовке.
+        /// </summary>
+        /// <param name="i">Индекс (для номера).</param>
+        /// <param name="label">Статик.</param>
         private void ShowCoordinatesInTitle(int i, Label label)
         {
             this.Text = $"№: {i + 1}."
                 + $" X={label.Left}, Y={label.Top}."
                 + $" Ширина: {label.Width}, высота: {label.Height}";
         }
-
-
-        
 
 
         /// <summary>
@@ -204,35 +237,25 @@ namespace Task_4_CreationOfStatics
             return false;
         }
 
+
+        /// <summary>
+        /// Создание статика.
+        /// </summary>
         private void CreateAStatics()
         {
-            Label temp = new Label();
+            Label temp = new Label();   // временный статик.
             temp.Location = _staticRect.Location;
             temp.Size = _staticRect.Size;
             temp.BorderStyle = BorderStyle.FixedSingle;
-
-            //temp.MouseDown += this.FormCreatStatics_MouseDown;
-            //temp.MouseUp += this.FormCreatStatics_MouseUp;
-
             temp.Enabled = false;
-            // создать
-            //ListLabels.Add(temp);
+
             this.Controls.Add(temp);
             this.Controls[this.Controls.Count - 1].BringToFront();
-            //this.Controls[this.Controls.Count - 1].Update();
-            //this.Controls[this.Controls.Count - 1].Enabled = false;
-            //this.Controls[this.Controls.Count - 1].MouseDown
-            //    += this.FormCreatStatics_MouseDown;
-            //this.Controls[this.Controls.Count - 1].MouseUp
-            //    += this.FormCreatStatics_MouseUp;
 
             // Запишем координаты созданного статика в список.
-            //ListStatics.Add(_staticRect);
             ListLabels.Add(temp);
-            //ListLabels[ListLabels.Count - 1].MouseDown
-            //    += this.FormCreatStatics_MouseDown;
-            //ListLabels[ListLabels.Count - 1].MouseUp
-            //    += this.FormCreatStatics_MouseUp;
         }
+
+
     }
 }
