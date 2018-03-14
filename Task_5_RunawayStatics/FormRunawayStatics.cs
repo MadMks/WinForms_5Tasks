@@ -69,8 +69,103 @@ namespace Task_5_RunawayStatics
                 //MessageBox.Show("work");
                 // метод двигать
                 // или событие
-                MoveRandomly();
+
+
+                //MoveRandomly();
+                MovementsInDifferentDirections(e);
             }
+        }
+
+        private void MovementsInDifferentDirections(MouseEventArgs e)
+        {
+            if (StaticOnTheLeft(e) == true)
+            {
+                MoveRight();
+            }
+            else if (StaticOnTheRight(e) == true)
+            {
+                MoveLeft();
+            }
+            else if (StaticOnTheTop(e) == true)
+            {
+                MoveDown();
+            }
+            else if (StaticOnTheBottom(e) == true)
+            {
+                MoveUp();
+            }
+        }
+
+        private bool StaticOnTheBottom(MouseEventArgs e)
+        {
+            if (
+                (e.X < _labelStatic.Right)
+                &&
+                (e.X > _labelStatic.Left)
+                &&
+                (e.Y > _labelStatic.Top + (_sizeStatic / 2))
+                &&
+                (e.Y < _labelStatic.Bottom + _aroundTheStaics)
+                )
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool StaticOnTheTop(MouseEventArgs e)
+        {
+            if (
+                (e.X < _labelStatic.Right)
+                &&
+                (e.X > _labelStatic.Left)
+                &&
+                (e.Y > _labelStatic.Top - _aroundTheStaics)
+                &&
+                (e.Y < _labelStatic.Bottom - (_sizeStatic / 2))
+                )
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool StaticOnTheRight(MouseEventArgs e)
+        {
+            if (
+                (e.X < _labelStatic.Right + _aroundTheStaics)
+                &&
+                (e.X > _labelStatic.Left + (_sizeStatic / 2))
+                &&
+                (e.Y > _labelStatic.Top)
+                &&
+                (e.Y < _labelStatic.Bottom)
+                )
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool StaticOnTheLeft(MouseEventArgs e)
+        {
+            if (
+                (e.X > _labelStatic.Left - _aroundTheStaics)
+                &&
+                (e.X < _labelStatic.Right - (_sizeStatic / 2))
+                &&
+                (e.Y > _labelStatic.Top)
+                &&
+                (e.Y < _labelStatic.Bottom)
+                )
+            {
+                return true;
+            }
+
+            return false;
         }
 
         private void MoveRandomly()
