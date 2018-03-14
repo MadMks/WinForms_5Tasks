@@ -29,6 +29,8 @@ namespace Task_5_RunawayStatics
 
         private Label _labelStatic;
 
+        private Random _rand;
+
 
         public FormRunawayStatics()
         {
@@ -47,6 +49,8 @@ namespace Task_5_RunawayStatics
         /// </summary>
         private void FormRunawayStatics_Load(object sender, EventArgs e)
         {
+            _rand = new Random();
+
             this.Text = Title;
             this.Width = 500;
             this.Height = 300;
@@ -62,10 +66,55 @@ namespace Task_5_RunawayStatics
         {
             if (IsMouseIsCloseToStatic(e) == true)
             {
-                MessageBox.Show("work");
+                //MessageBox.Show("work");
                 // метод двигать
                 // или событие
+                MoveRandomly();
             }
+        }
+
+        private void MoveRandomly()
+        {
+            switch (_rand.Next(1, 5))
+            {
+                case 1:
+                    MoveRight();
+                    break;
+                case 2:
+                    MoveLeft();
+                    break;
+                case 3:
+                    MoveDown();
+                    break;
+                case 4:
+                    MoveUp();
+                    break;
+                default:
+                    MessageBox.Show("Error \"switch\"", "Внимание!",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+            }
+        }
+
+        private void MoveUp()
+        {
+            _labelStatic.Top--;
+        }
+
+        private void MoveDown()
+        {
+            _labelStatic.Top++;
+        }
+
+        private void MoveLeft()
+        {
+            _labelStatic.Left--;
+        }
+
+        private void MoveRight()
+        {
+            //MoveStatic()
+            _labelStatic.Left++;
         }
 
 
