@@ -1,6 +1,6 @@
 ﻿namespace Task_5_RunawayStatics
 {
-    partial class Form1
+    partial class FormRunawayStatics
     {
         /// <summary>
         /// Required designer variable.
