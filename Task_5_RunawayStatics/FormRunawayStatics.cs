@@ -60,15 +60,36 @@ namespace Task_5_RunawayStatics
         /// </summary>
         private void FormRunawayStatics_MouseMove(object sender, MouseEventArgs e)
         {
-            if (IsMouseIsCloseToStatic() == true)
+            if (IsMouseIsCloseToStatic(e) == true)
             {
-
+                MessageBox.Show("work");
+                // метод двигать
+                // или событие
             }
         }
 
-        private bool IsMouseIsCloseToStatic()
+
+        /// <summary>
+        /// Указатель мыши близко к статику.
+        /// </summary>
+        /// <param name="e">Параметры события.</param>
+        /// <returns>true если близко.</returns>
+        private bool IsMouseIsCloseToStatic(MouseEventArgs e)
         {
-            throw new NotImplementedException();
+            if (
+                (e.X > (_labelStatic.Left - _aroundTheStaics))
+                &&
+                (e.X < (_labelStatic.Right + _aroundTheStaics))
+                &&
+                (e.Y > (_labelStatic.Top - _aroundTheStaics))
+                &&
+                (e.Y < (_labelStatic.Bottom + _aroundTheStaics))
+                )
+            {
+                return true;
+            }
+
+            return false;
         }
 
 
