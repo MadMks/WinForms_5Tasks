@@ -8,6 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
+// NOTE: Для определения куда переместить статик рандомно,
+// образно разбил форму на четыре квадрата (Quadrant)
+/*  Пример расположения:
+ 1 2
+ 3 4 
+    */
+// Для более лучшего эффекта
+// форму можно разбить образно на 16 квадратов.
+
+
+
 namespace Task_5_RunawayStatics
 {
     public partial class FormRunawayStatics : Form
@@ -26,10 +38,15 @@ namespace Task_5_RunawayStatics
         /// Отступ от формы (который не может пересекать статик).
         /// </summary>
         private const int _indentForm = 5;
-
+        /// <summary>
+        /// Убегающий статик.
+        /// </summary>
         private Label _labelStatic;
-
+        /// <summary>
+        /// Рандомное число, для рандомного выбора перемещения.
+        /// </summary>
         private Random _rand;
+
 
 
         public FormRunawayStatics()
@@ -40,6 +57,7 @@ namespace Task_5_RunawayStatics
             this.MouseMove += FormRunawayStatics_MouseMove;
         }
         
+
 
         // Обработчики событий.
 
@@ -66,20 +84,28 @@ namespace Task_5_RunawayStatics
         {
             if (IsMouseIsCloseToStatic(e) == true)
             {
-                MotionWhenApproachingTheWall(e);
+                MotionWhenApproachingTheWall();
 
                 MovementsInDifferentDirections(e);
             }
         }
 
 
-        private void MotionWhenApproachingTheWall(MouseEventArgs e)
+        // Методы.
+
+
+        /// <summary>
+        /// Движение при приближении к стенке.
+        /// </summary>
+        private void MotionWhenApproachingTheWall()
         {
             if (IsStaticsCloseToOneOfTheWalls() == true)
             {
                 MoveRandomly();
             }
         }
+
+
         /// <summary>
         /// Статик близко к одной из стенок.
         /// </summary>
@@ -98,6 +124,10 @@ namespace Task_5_RunawayStatics
         }
 
 
+        /// <summary>
+        /// Статик близко к нижней стенке.
+        /// </summary>
+        /// <returns>true если близко.</returns>
         private bool IsCloseToTheBottomWall()
         {
             if (_labelStatic.Bottom > this.ClientRectangle.Bottom - _indentForm)
@@ -108,6 +138,11 @@ namespace Task_5_RunawayStatics
             return false;
         }
 
+
+        /// <summary>
+        /// Статик близко к правой стенке.
+        /// </summary>
+        /// <returns>true если близко.</returns>
         private bool IsCloseToTheRightWall()
         {
             if (_labelStatic.Right > this.ClientRectangle.Right - _indentForm)
@@ -118,6 +153,11 @@ namespace Task_5_RunawayStatics
             return false;
         }
 
+
+        /// <summary>
+        /// Статик близко к верхней стенке.
+        /// </summary>
+        /// <returns>true если близко.</returns>
         private bool IsCloseToTheTopWall()
         {
             if (_labelStatic.Top < this.ClientRectangle.Top + _indentForm)
@@ -128,6 +168,11 @@ namespace Task_5_RunawayStatics
             return false;
         }
 
+
+        /// <summary>
+        /// Статик близко к левой стенке.
+        /// </summary>
+        /// <returns>true если близко.</returns>
         private bool IsCloseToTheLeftWall()
         {
             if (_labelStatic.Left < this.ClientRectangle.Left + _indentForm)
@@ -138,58 +183,11 @@ namespace Task_5_RunawayStatics
             return false;
         }
 
-        private bool IsMouseInTheFourthQuadrant(MouseEventArgs e)
-        {
-            if (
-                (e.X > (this.ClientRectangle.Width / 2))
-                && (e.Y > (this.ClientRectangle.Height / 2))
-                )
-            {
-                return true;
-            }
 
-            return false;
-        }
-
-        private bool IsMouseInTheThirdQuadrant(MouseEventArgs e)
-        {
-            if (
-                (e.X < (this.ClientRectangle.Width / 2))
-                && (e.Y > (this.ClientRectangle.Height / 2))
-                )
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        private bool IsMouseInTheSecondQuadrant(MouseEventArgs e)
-        {
-            if (
-                (e.X > (this.ClientRectangle.Width / 2))
-                && (e.Y < (this.ClientRectangle.Height / 2))
-                )
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        private bool IsMouseInTheFirstQuadrant(MouseEventArgs e)
-        {
-            if (
-                (e.X < (this.ClientRectangle.Width / 2))
-                && (e.Y < (this.ClientRectangle.Height / 2))
-                )
-            {
-                return true;
-            }
-
-            return false;
-        }
-
+        /// <summary>
+        /// Движения в разных направлениях.
+        /// </summary>
+        /// <param name="e">Параметры события.</param>
         private void MovementsInDifferentDirections(MouseEventArgs e)
         {
             if ( IsLeftOfTheStatic(e) == true)
@@ -230,6 +228,12 @@ namespace Task_5_RunawayStatics
             }
         }
 
+
+        /// <summary>
+        /// Справа и снизу от статика.
+        /// </summary>
+        /// <param name="e">Параметры события.</param>
+        /// <returns>true если справа и снизу.</returns>
         private bool IsRightAndBottomOfTheStatic(MouseEventArgs e)
         {
             if (
@@ -244,6 +248,12 @@ namespace Task_5_RunawayStatics
             return false;
         }
 
+
+        /// <summary>
+        /// Справа и сверху от статика.
+        /// </summary>
+        /// <param name="e">Параметры события.</param>
+        /// <returns>true если справа и сверху.</returns>
         private bool IsRightAndTopOfTheStatic(MouseEventArgs e)
         {
             if (
@@ -258,6 +268,12 @@ namespace Task_5_RunawayStatics
             return false;
         }
 
+
+        /// <summary>
+        /// Слева и сверху от статика.
+        /// </summary>
+        /// <param name="e">Параметры события.</param>
+        /// <returns>true если слева и сверху.</returns>
         private bool IsLeftAndTopOfTheStatic(MouseEventArgs e)
         {
             if (
@@ -272,6 +288,12 @@ namespace Task_5_RunawayStatics
             return false;
         }
 
+
+        /// <summary>
+        /// Слева и снизу от статика.
+        /// </summary>
+        /// <param name="e">Параметры события.</param>
+        /// <returns>true если слева и снизу.</returns>
         private bool IsLeftAndBottomOfTheStatic(MouseEventArgs e)
         {
             if (
@@ -286,6 +308,12 @@ namespace Task_5_RunawayStatics
             return false;
         }
 
+
+        /// <summary>
+        /// Снизу от статика.
+        /// </summary>
+        /// <param name="e">Параметры события.</param>
+        /// <returns>true если снизу.</returns>
         private bool IsBottomOfTheStatic(MouseEventArgs e)
         {
             if (
@@ -304,6 +332,12 @@ namespace Task_5_RunawayStatics
             return false;
         }
 
+
+        /// <summary>
+        /// Сверху от статика.
+        /// </summary>
+        /// <param name="e">Параметры события.</param>
+        /// <returns>true если сверху.</returns>
         private bool IsTopOfTheStatic(MouseEventArgs e)
         {
             if (
@@ -322,6 +356,12 @@ namespace Task_5_RunawayStatics
             return false;
         }
 
+
+        /// <summary>
+        /// Справа от статика.
+        /// </summary>
+        /// <param name="e">Параметры события.</param>
+        /// <returns>true если справа.</returns>
         private bool IsRightOfTheStatic(MouseEventArgs e)
         {
             if (
@@ -340,6 +380,12 @@ namespace Task_5_RunawayStatics
             return false;
         }
 
+
+        /// <summary>
+        /// Слева от статика.
+        /// </summary>
+        /// <param name="e">Параметры события.</param>
+        /// <returns>true если слева.</returns>
         private bool IsLeftOfTheStatic(MouseEventArgs e)
         {
             if (
@@ -358,6 +404,10 @@ namespace Task_5_RunawayStatics
             return false;
         }
 
+
+        /// <summary>
+        /// Рандомное перемещение.
+        /// </summary>
         private void MoveRandomly()
         {
             switch (_rand.Next(1, 5))
@@ -381,6 +431,11 @@ namespace Task_5_RunawayStatics
             }
         }
 
+
+        /// <summary>
+        /// Получение точки для перемещения в "четвертый квадрат".
+        /// </summary>
+        /// <returns>Координаты точки назначения.</returns>
         private Point MoveToTheFourthQuadrant()
         {
             Point temp = new Point();
@@ -395,6 +450,11 @@ namespace Task_5_RunawayStatics
             return temp;
         }
 
+
+        /// <summary>
+        /// Получение точки для перемещения в "третий квадрат".
+        /// </summary>
+        /// <returns>Координаты точки назначения.</returns>
         private Point MoveToTheThirdQuadrant()
         {
             Point temp = new Point();
@@ -409,6 +469,11 @@ namespace Task_5_RunawayStatics
             return temp;
         }
 
+
+        /// <summary>
+        /// Получение точки для перемещения в "второй квадрат".
+        /// </summary>
+        /// <returns>Координаты точки назначения.</returns>
         private Point MoveToTheSecondQuadrant()
         {
             Point temp = new Point();
@@ -422,6 +487,11 @@ namespace Task_5_RunawayStatics
             return temp;
         }
 
+
+        /// <summary>
+        /// Получение точки для перемещения в "первый квадрат".
+        /// </summary>
+        /// <returns>Координаты точки назначения.</returns>
         private Point MoveToTheFirstQuadrant()
         {
             Point temp = new Point();
@@ -434,24 +504,39 @@ namespace Task_5_RunawayStatics
             return temp;
         }
 
+
+        /// <summary>
+        /// Переместить вверх (на 1px).
+        /// </summary>
         private void MoveUp()
         {
             _labelStatic.Top--;
         }
 
+
+        /// <summary>
+        /// Переместить вниз (на 1px).
+        /// </summary>
         private void MoveDown()
         {
             _labelStatic.Top++;
         }
 
+
+        /// <summary>
+        /// Переместить влево (на 1px).
+        /// </summary>
         private void MoveLeft()
         {
             _labelStatic.Left--;
         }
 
+
+        /// <summary>
+        /// Переместить вправо (на 1px).
+        /// </summary>
         private void MoveRight()
         {
-            //MoveStatic()
             _labelStatic.Left++;
         }
 
@@ -508,5 +593,7 @@ namespace Task_5_RunawayStatics
 
             return temp;
         }
+
+
     }
 }
