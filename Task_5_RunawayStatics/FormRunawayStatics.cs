@@ -77,6 +77,29 @@ namespace Task_5_RunawayStatics
             }
         }
 
+
+        //private void MotionWhenApproachingTheWall(MouseEventArgs e)
+        //{
+        //    if (IsStaticsCloseToOneOfTheWalls(e) == true)
+        //    {
+
+        //    }
+        //}
+        ///// <summary>
+        ///// Статик близко к одной из стенок.
+        ///// </summary>
+        ///// <returns>true если близко.</returns>
+        //private bool IsStaticsCloseToOneOfTheWalls(MouseEventArgs e)
+        //{
+        //    if (IsMouseInTheFirstQuadrant(e) == true
+        //        || IsMouseInTheSecondQuadrant(e) == true
+        //        || IsMouseInTheSecondQuadrant(e) == true
+        //        || )
+        //    {
+
+        //    }
+        //}
+
         private void MotionWhenApproachingTheWall(MouseEventArgs e)
         {
             if (IsMouseInTheFirstQuadrant(e) == true)
