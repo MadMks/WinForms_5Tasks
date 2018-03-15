@@ -66,13 +66,8 @@ namespace Task_5_RunawayStatics
         {
             if (IsMouseIsCloseToStatic(e) == true)
             {
-                //MessageBox.Show("work");
-                // метод двигать
-                // или событие
-
                 MotionWhenApproachingTheWall(e);
 
-                //MoveRandomly();
                 MovementsInDifferentDirections(e);
             }
         }
@@ -80,7 +75,7 @@ namespace Task_5_RunawayStatics
 
         private void MotionWhenApproachingTheWall(MouseEventArgs e)
         {
-            if (IsStaticsCloseToOneOfTheWalls(e) == true)
+            if (IsStaticsCloseToOneOfTheWalls() == true)
             {
                 MoveRandomly();
             }
@@ -89,7 +84,7 @@ namespace Task_5_RunawayStatics
         /// Статик близко к одной из стенок.
         /// </summary>
         /// <returns>true если близко.</returns>
-        private bool IsStaticsCloseToOneOfTheWalls(MouseEventArgs e)    // TODO убрать e
+        private bool IsStaticsCloseToOneOfTheWalls()
         {
             if (IsCloseToTheLeftWall() == true
                 || IsCloseToTheTopWall() == true
@@ -102,61 +97,6 @@ namespace Task_5_RunawayStatics
             return false;
         }
 
-        //private void MotionWhenApproachingTheWall(MouseEventArgs e)
-        //{
-        //    if (IsMouseInTheFirstQuadrant(e) == true)
-        //    {
-        //        if (IsCloseToTheLeftWall() == true)
-        //        {
-        //            MoveDown();     // TODO переместить в другой квадрат
-        //            MoveRight();    // и убрать рандом.
-        //        }
-        //        else if (IsCloseToTheTopWall() == true)
-        //        {
-        //            MoveRight();
-        //            MoveDown();
-        //        }
-        //    }
-        //    else if (IsMouseInTheSecondQuadrant(e) == true)
-        //    {
-        //        if (IsCloseToTheRightWall() == true)
-        //        {
-        //            MoveDown();
-        //            MoveLeft();
-        //        }
-        //        else if (IsCloseToTheTopWall() == true)
-        //        {
-        //            MoveLeft();
-        //            MoveDown();
-        //        }
-        //    }
-        //    else if (IsMouseInTheThirdQuadrant(e) == true)
-        //    {
-        //        if (IsCloseToTheLeftWall() == true)
-        //        {
-        //            MoveUp();
-        //            MoveRight();
-        //        }
-        //        else if (IsCloseToTheBottomWall() == true)
-        //        {
-        //            MoveRight();
-        //            MoveUp();
-        //        }
-        //    }
-        //    else if (IsMouseInTheFourthQuadrant(e) == true)
-        //    {
-        //        if (IsCloseToTheRightWall() == true)
-        //        {
-        //            MoveUp();
-        //            MoveLeft();
-        //        }
-        //        else if (IsCloseToTheBottomWall() == true)
-        //        {
-        //            MoveLeft();
-        //            MoveUp();
-        //        }
-        //    }
-        //}
 
         private bool IsCloseToTheBottomWall()
         {
@@ -270,25 +210,21 @@ namespace Task_5_RunawayStatics
             }
             else if (IsLeftAndBottomOfTheStatic(e) == true)
             {
-                //MoveRandomly(); // TODO по диагонали.
                 MoveUp();
                 MoveRight();
             }
             else if (IsLeftAndTopOfTheStatic(e) == true)
             {
-                //MoveRandomly();
                 MoveRight();
                 MoveDown();
             }
             else if (IsRightAndTopOfTheStatic(e) == true)
             {
-                //MoveRandomly();
                 MoveLeft();
                 MoveDown();
             }
             else if (IsRightAndBottomOfTheStatic(e) == true)
             {
-                //MoveRandomly();
                 MoveLeft();
                 MoveUp();
             }
@@ -427,21 +363,16 @@ namespace Task_5_RunawayStatics
             switch (_rand.Next(1, 5))
             {
                 case 1:
-                    //MoveRight();
-                    // переместить в 1й квадрат
                     _labelStatic.Location =  MoveToTheFirstQuadrant();
                     break;
                 case 2:
-                    //MoveLeft();
-                    _labelStatic.Location = MoveToTheFirstQuadrant();
+                    _labelStatic.Location = MoveToTheSecondQuadrant();
                     break;
                 case 3:
-                    //MoveDown();
-                    _labelStatic.Location = MoveToTheFirstQuadrant();
+                    _labelStatic.Location = MoveToTheThirdQuadrant();
                     break;
                 case 4:
-                    //MoveUp();
-                    _labelStatic.Location = MoveToTheFirstQuadrant();
+                    _labelStatic.Location = MoveToTheFourthQuadrant();
                     break;
                 default:
                     MessageBox.Show("Error \"switch\"", "Внимание!",
@@ -450,10 +381,49 @@ namespace Task_5_RunawayStatics
             }
         }
 
+        private Point MoveToTheFourthQuadrant()
+        {
+            Point temp = new Point();
+
+            temp.X =
+                ((this.ClientRectangle.Width / 2) + (this.ClientRectangle.Width / 4))
+                - (_sizeStatic / 2);
+            temp.Y =
+                ((this.ClientRectangle.Height / 2) + (this.ClientRectangle.Height / 4))
+                - (_sizeStatic / 2);
+
+            return temp;
+        }
+
+        private Point MoveToTheThirdQuadrant()
+        {
+            Point temp = new Point();
+
+            temp.X =
+                ((this.ClientRectangle.Width / 2) / 2)
+                - (_sizeStatic / 2);
+            temp.Y =
+                ((this.ClientRectangle.Height / 2) + (this.ClientRectangle.Height / 4))
+                - (_sizeStatic / 2);
+
+            return temp;
+        }
+
+        private Point MoveToTheSecondQuadrant()
+        {
+            Point temp = new Point();
+
+            temp.X =
+                ((this.ClientRectangle.Width / 2) + (this.ClientRectangle.Width / 4))
+                - (_sizeStatic / 2);
+            temp.Y =
+                ((this.ClientRectangle.Height / 2) / 2) - (_sizeStatic / 2);
+
+            return temp;
+        }
+
         private Point MoveToTheFirstQuadrant()
         {
-            //temp.X = (this.ClientRectangle.Width / 2) - (_sizeStatic / 2);
-            //temp.Y = (this.ClientRectangle.Height / 2) - (_sizeStatic / 2);
             Point temp = new Point();
 
             temp.X = 
