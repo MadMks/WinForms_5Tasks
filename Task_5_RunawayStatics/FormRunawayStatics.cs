@@ -78,83 +78,85 @@ namespace Task_5_RunawayStatics
         }
 
 
-        //private void MotionWhenApproachingTheWall(MouseEventArgs e)
-        //{
-        //    if (IsStaticsCloseToOneOfTheWalls(e) == true)
-        //    {
-
-        //    }
-        //}
-        ///// <summary>
-        ///// Статик близко к одной из стенок.
-        ///// </summary>
-        ///// <returns>true если близко.</returns>
-        //private bool IsStaticsCloseToOneOfTheWalls(MouseEventArgs e)
-        //{
-        //    if (IsMouseInTheFirstQuadrant(e) == true
-        //        || IsMouseInTheSecondQuadrant(e) == true
-        //        || IsMouseInTheSecondQuadrant(e) == true
-        //        || )
-        //    {
-
-        //    }
-        //}
-
         private void MotionWhenApproachingTheWall(MouseEventArgs e)
         {
-            if (IsMouseInTheFirstQuadrant(e) == true)
+            if (IsStaticsCloseToOneOfTheWalls(e) == true)
             {
-                if (IsCloseToTheLeftWall() == true)
-                {
-                    MoveDown();     // TODO переместить в другой квадрат
-                    MoveRight();    // и убрать рандом.
-                }
-                else if (IsCloseToTheTopWall() == true)
-                {
-                    MoveRight();
-                    MoveDown();
-                }
-            }
-            else if (IsMouseInTheSecondQuadrant(e) == true)
-            {
-                if (IsCloseToTheRightWall() == true)
-                {
-                    MoveDown();
-                    MoveLeft();
-                }
-                else if (IsCloseToTheTopWall() == true)
-                {
-                    MoveLeft();
-                    MoveDown();
-                }
-            }
-            else if (IsMouseInTheThirdQuadrant(e) == true)
-            {
-                if (IsCloseToTheLeftWall() == true)
-                {
-                    MoveUp();
-                    MoveRight();
-                }
-                else if (IsCloseToTheBottomWall() == true)
-                {
-                    MoveRight();
-                    MoveUp();
-                }
-            }
-            else if (IsMouseInTheFourthQuadrant(e) == true)
-            {
-                if (IsCloseToTheRightWall() == true)
-                {
-                    MoveUp();
-                    MoveLeft();
-                }
-                else if (IsCloseToTheBottomWall() == true)
-                {
-                    MoveLeft();
-                    MoveUp();
-                }
+                MoveRandomly();
             }
         }
+        /// <summary>
+        /// Статик близко к одной из стенок.
+        /// </summary>
+        /// <returns>true если близко.</returns>
+        private bool IsStaticsCloseToOneOfTheWalls(MouseEventArgs e)    // TODO убрать e
+        {
+            if (IsCloseToTheLeftWall() == true
+                || IsCloseToTheTopWall() == true
+                || IsCloseToTheRightWall() == true
+                || IsCloseToTheBottomWall() == true)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        //private void MotionWhenApproachingTheWall(MouseEventArgs e)
+        //{
+        //    if (IsMouseInTheFirstQuadrant(e) == true)
+        //    {
+        //        if (IsCloseToTheLeftWall() == true)
+        //        {
+        //            MoveDown();     // TODO переместить в другой квадрат
+        //            MoveRight();    // и убрать рандом.
+        //        }
+        //        else if (IsCloseToTheTopWall() == true)
+        //        {
+        //            MoveRight();
+        //            MoveDown();
+        //        }
+        //    }
+        //    else if (IsMouseInTheSecondQuadrant(e) == true)
+        //    {
+        //        if (IsCloseToTheRightWall() == true)
+        //        {
+        //            MoveDown();
+        //            MoveLeft();
+        //        }
+        //        else if (IsCloseToTheTopWall() == true)
+        //        {
+        //            MoveLeft();
+        //            MoveDown();
+        //        }
+        //    }
+        //    else if (IsMouseInTheThirdQuadrant(e) == true)
+        //    {
+        //        if (IsCloseToTheLeftWall() == true)
+        //        {
+        //            MoveUp();
+        //            MoveRight();
+        //        }
+        //        else if (IsCloseToTheBottomWall() == true)
+        //        {
+        //            MoveRight();
+        //            MoveUp();
+        //        }
+        //    }
+        //    else if (IsMouseInTheFourthQuadrant(e) == true)
+        //    {
+        //        if (IsCloseToTheRightWall() == true)
+        //        {
+        //            MoveUp();
+        //            MoveLeft();
+        //        }
+        //        else if (IsCloseToTheBottomWall() == true)
+        //        {
+        //            MoveLeft();
+        //            MoveUp();
+        //        }
+        //    }
+        //}
 
         private bool IsCloseToTheBottomWall()
         {
@@ -425,22 +427,41 @@ namespace Task_5_RunawayStatics
             switch (_rand.Next(1, 5))
             {
                 case 1:
-                    MoveRight();
+                    //MoveRight();
+                    // переместить в 1й квадрат
+                    _labelStatic.Location =  MoveToTheFirstQuadrant();
                     break;
                 case 2:
-                    MoveLeft();
+                    //MoveLeft();
+                    _labelStatic.Location = MoveToTheFirstQuadrant();
                     break;
                 case 3:
-                    MoveDown();
+                    //MoveDown();
+                    _labelStatic.Location = MoveToTheFirstQuadrant();
                     break;
                 case 4:
-                    MoveUp();
+                    //MoveUp();
+                    _labelStatic.Location = MoveToTheFirstQuadrant();
                     break;
                 default:
                     MessageBox.Show("Error \"switch\"", "Внимание!",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
             }
+        }
+
+        private Point MoveToTheFirstQuadrant()
+        {
+            //temp.X = (this.ClientRectangle.Width / 2) - (_sizeStatic / 2);
+            //temp.Y = (this.ClientRectangle.Height / 2) - (_sizeStatic / 2);
+            Point temp = new Point();
+
+            temp.X = 
+                ((this.ClientRectangle.Width / 2) / 2) - (_sizeStatic / 2);
+            temp.Y =
+                ((this.ClientRectangle.Height / 2) / 2) - (_sizeStatic / 2);
+
+            return temp;
         }
 
         private void MoveUp()
