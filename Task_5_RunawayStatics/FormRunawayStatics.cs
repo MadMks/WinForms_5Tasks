@@ -83,8 +83,8 @@ namespace Task_5_RunawayStatics
             {
                 if (IsCloseToTheLeftWall() == true)
                 {
-                    MoveDown();
-                    MoveRight();
+                    MoveDown();     // TODO переместить в другой квадрат
+                    MoveRight();    // и убрать рандом.
                 }
                 else if (IsCloseToTheTopWall() == true)
                 {
@@ -245,19 +245,27 @@ namespace Task_5_RunawayStatics
             }
             else if (IsLeftAndBottomOfTheStatic(e) == true)
             {
-                MoveRandomly(); // TODO по диагонали.
+                //MoveRandomly(); // TODO по диагонали.
+                MoveUp();
+                MoveRight();
             }
             else if (IsLeftAndTopOfTheStatic(e) == true)
             {
-                MoveRandomly();
+                //MoveRandomly();
+                MoveRight();
+                MoveDown();
             }
             else if (IsRightAndTopOfTheStatic(e) == true)
             {
-                MoveRandomly();
+                //MoveRandomly();
+                MoveLeft();
+                MoveDown();
             }
             else if (IsRightAndBottomOfTheStatic(e) == true)
             {
-                MoveRandomly();
+                //MoveRandomly();
+                MoveLeft();
+                MoveUp();
             }
         }
 
